@@ -4,6 +4,7 @@ const path = require('path')
 const fs = require('fs')
 const mkdirp = require('mkdirp')
 
+const ComponentIndex = require('./components/component-index')
 const PureComponent = require('./components/pure-component')
 const StyleSheet = require('./components/stylesheet')
 const ShallowRender = require('./components/shallow-render')
@@ -40,6 +41,7 @@ function createComponent (name) {
     PureComponent(rootDirectory, name, hasCSS)
   }
 
+  ComponentIndex(rootDirectory, name)
   ShallowRender(rootDirectory, name)
 
   console.log(`Component ${name} created`)
