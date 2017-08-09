@@ -1,9 +1,9 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react'
 
 class Template extends PureComponent {
-  render() {
-    return <div>Template</div>;
+  render () {
+    return <div>Template</div>
   }
 }
 
-export default Template;
+export default Template

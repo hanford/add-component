@@ -1,7 +1,7 @@
-const getTemplate = require("./get-template");
+const getTemplate = require('./get-template')
 
-module.exports = PureComponent;
+module.exports = PureComponent
 
-function PureComponent(rootDirectory, name, hasCSS) {
-  return getTemplate(rootDirectory, name, hasCSS, "functional-component");
+function PureComponent (rootDirectory, name, hasCSS) {
+  return getTemplate(rootDirectory, name, hasCSS, 'functional-component')
 }

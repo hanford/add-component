@@ -1,8 +1,8 @@
-import React from "react";
-import { shallow } from "enzyme";
+import React from 'react'
+import { shallow } from 'enzyme'
 
-import Template from "./template.js";
+import Template from './template.js'
 
-it("renders without props", () => {
-  shallow(<Template />);
-});
+it('renders without props', () => {
+  shallow(<Template />)
+})
