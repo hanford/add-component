@@ -1,0 +1,38 @@
+{
+  "name": "add-react-component",
+  "version": "0.1.0",
+  "description": "Create React Component CLI",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hanford/add-react-component.git"
+  },
+  "homepage": "https://github.com/hanford/add-react-component",
+  "bugs": "https://github.com/hanford/add-react-component/issues",
+  "authors": [
+    "Jack Hanford"
+  ],
+  "license": "MIT",
+  "files": "index.js",
+  "bin": {
+    "add-react-component": "./index.js"
+  },
+  "dependencies": {
+    "commander": "~2.9.0",
+    "mkdirp": "~0.5.1",
+    "titlecase": "~1.1.2"
+  },
+  "tags": [
+    "react",
+    "create",
+    "component",
+    "purecomponent",
+    "cli"
+  ],
+  "keywords": [
+    "react",
+    "create",
+    "component",
+    "purecomponent",
+    "cli"
+  ]
+}
