@@ -17,6 +17,7 @@
     "add-react-component": "./index.js"
   },
   "dependencies": {
+    "chalk": "~2.1.0",
     "commander": "~2.9.0",
     "mkdirp": "~0.5.1",
     "titlecase": "~1.1.2"

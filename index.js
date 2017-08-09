@@ -3,6 +3,7 @@
 const path = require('path')
 const fs = require('fs')
 const mkdirp = require('mkdirp')
+const chalk = require('chalk')
 
 const ComponentIndex = require('./components/component-index')
 const PureComponent = require('./components/pure-component')
@@ -44,5 +45,5 @@ function createComponent (name) {
   ComponentIndex(rootDirectory, name)
   ShallowRender(rootDirectory, name)
 
-  console.log(`Component ${name} created`)
+  console.log(chalk.green(`Component ${chalk.blue.underline.bold(name)} created`))
 }
