@@ -1,7 +1,10 @@
-const Utilities = require("./utilities");
+const path = require("path");
+const fs = require("fs");
 
 module.exports = StyleSheet;
 
 function StyleSheet(rootDirectory) {
-  return Utilities.getStyles(rootDirectory);
+  const templateLocation = "../templates/style.css";
+  const body = fs.readFileSync(path.join(__dirname, templateLocation), "utf-8");
+  fs.writeFileSync(path.join(rootDirectory, "style.css"), body);
 }
