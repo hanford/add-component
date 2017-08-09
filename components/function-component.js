@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const toTitleCase = require('titlecase')
 
 module.exports = FunctionComponent
 
@@ -12,11 +13,13 @@ function FunctionComponent (rootDirectory, name, hasCSS) {
 
 // pretty janky, but we want this whitespace to be reflected in the component.
 function templateWithCSS (name) {
+  const proper = toTitleCase(name)
+
   return `import React from 'react'
 
 import style from './style.css'
 
-export default function ${name} (props) {
+export default function ${proper} (props) {
   return (
     <div className={style.container}>${name}</div>
   )

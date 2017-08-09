@@ -8,37 +8,66 @@ Run
 
 ```npm install -g add-react-component```
 
-
-<br>
-
 ## Usage
 
-### Generate Class PureComponent
+```
+# Generate PureComponent and shallow render test
+$ add-react-component
 
-Run
+# Generate PureComponent and shallow render test with stylesheet
+$ add-react-component -c
 
-```add-react-component ComponentName```
+# Generate Functional Component and shallow render test with stylesheet
+$ add-react-component -c -f
+```
 
-This will create a folder of your component name, and a **Class PureComponent** js file with the same name.
+## Example
 
-<br>
+```sh
+add-react-component example -c
+```
+Generates `example` folder with the following:
 
-### Generate Function Component
+`index.js`
+```js
+import Example from './example.js'
 
-Run
+export default Example
+```
 
-```add-react-component ComponentName -f```
+`style.css`
+```css
+.container {}
+```
 
-This will create a folder of your component name, and **Function Component** js file of the same name.
+`example.js`
+```js
+import React, { PureComponent } from 'react'
 
-<br>
-### Generate PureComponent or Function Component with a CSS file
+import style from './style.css'
 
-Run
+class Example extends PureComponent {
+  render () {
+    return (
+      <div className={style.container}>test</div>
+    )
+  }
+}
 
-```add-react-component ComponentName -p -c```
+export default Example
+```
 
-This will create a folder of your component name, and component (Functional if ```-f```) js file of the same name, and a css file of the same name.
+`example.test.js`
+```
+import React from 'react'
+import { shallow } from 'enzyme'
+
+import Example from './example.js'
+
+it('renders without props', () => {
+  shallow(<Example />)
+})
+```
 
 ## License
 

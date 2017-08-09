@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const toTitleCase = require('titlecase')
 
 module.exports = PureComponent
 
@@ -12,11 +13,13 @@ function PureComponent (rootDirectory, name, hasCSS) {
 
 // pretty janky, but we want this whitespace to be reflected in the component.
 function templateWithCSS (name) {
+  const proper = toTitleCase(name)
+
   return `import React, { PureComponent } from 'react'
 
 import style from './style.css'
 
-class ${name} extends PureComponent {
+class ${proper} extends PureComponent {
   render () {
     return (
       <div className={style.container}>${name}</div>
@@ -24,7 +27,7 @@ class ${name} extends PureComponent {
   }
 }
 
-export default ${name}
+export default ${proper}
 `
 }
 

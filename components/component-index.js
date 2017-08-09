@@ -2,7 +2,6 @@ const path = require('path')
 const fs = require('fs')
 const toTitleCase = require('titlecase')
 
-
 module.exports = ComponentIndex
 
 function ComponentIndex (rootDirectory, name) {
