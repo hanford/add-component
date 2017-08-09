@@ -16,6 +16,10 @@
   "bin": {
     "add-component": "./index.js"
   },
+  "scripts": {
+    "standard": "standard",
+    "test": "standard"
+  },
   "dependencies": {
     "chalk": "~2.1.0",
     "commander": "~2.9.0",
@@ -35,5 +39,8 @@
     "component",
     "purecomponent",
     "cli"
-  ]
+  ],
+  "devDependencies": {
+    "standard": "~10.0.3"
+  }
 }
