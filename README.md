@@ -1,4 +1,4 @@
-# add-react-component
+# add-component
 
 Generate the component boilerplate, CSS, and a shallow render test with one line.
 
@@ -6,25 +6,25 @@ Generate the component boilerplate, CSS, and a shallow render test with one line
 
 Run
 
-```npm install -g add-react-component```
+```npm install -g add-component```
 
 ## Usage
 
 ```
 # Generate PureComponent and shallow render test
-$ add-react-component
+$ add-component
 
 # Generate PureComponent and shallow render test with stylesheet
-$ add-react-component -c
+$ add-component -c
 
 # Generate Functional Component and shallow render test with stylesheet
-$ add-react-component -c -f
+$ add-component -c -f
 ```
 
 ## Example
 
 ```sh
-add-react-component example -c
+add-component example -c
 ```
 Generates `example` folder with the following:
 
