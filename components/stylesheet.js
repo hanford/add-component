@@ -1,12 +1,10 @@
-const path = require('path')
-const fs = require('fs')
+const path = require("path");
+const fs = require("fs");
 
-module.exports = StyleSheet
+module.exports = StyleSheet;
 
-const container = `.container {
-}
-`
-
-function StyleSheet (rootDirectory, name) {
-  return fs.writeFileSync(path.join(rootDirectory, 'style.css'), container)
+function StyleSheet(rootDirectory) {
+  const templateLocation = "../templates/style.css";
+  const body = fs.readFileSync(path.join(__dirname, templateLocation), "utf-8");
+  fs.writeFileSync(path.join(rootDirectory, "style.css"), body);
 }

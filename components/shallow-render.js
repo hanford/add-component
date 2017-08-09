@@ -1,27 +1,19 @@
-const path = require('path')
-const fs = require('fs')
-const toTitleCase = require('titlecase')
+const path = require("path");
+const fs = require("fs");
+const toTitleCase = require("titlecase");
 
-module.exports = ShallowRenderTest
+module.exports = ShallowRenderTest;
 
-function ShallowRenderTest (rootDirectory, name) {
-  const file = path.join(rootDirectory, `${name}.test.js`)
-  const body = template(name)
+function ShallowRenderTest(rootDirectory, name) {
+  const file = path.join(rootDirectory, `${name}.test.js`);
+  const templateLocation = "../templates/test.js";
 
-  return fs.writeFileSync(file, body)
-}
+  const body = fs
+    .readFileSync(path.join(__dirname, templateLocation), "utf-8")
+    .split("Template")
+    .join(toTitleCase(name))
+    .split("template")
+    .join(name);
 
-// pretty janky, but we want this whitespace to be reflected in the component.
-function template (name) {
-  const proper = toTitleCase(name)
-
-  return `import React from 'react'
-import { shallow } from 'enzyme'
-
-import ${proper} from './${name}.js'
-
-it('renders without props', () => {
-  shallow(<${proper} />)
-})
-`
+  return fs.writeFileSync(file, body);
 }
