@@ -12,7 +12,6 @@ const ShallowRender = require('./components/shallow-render')
 const FunctionComponent = require('./components/function-component')
 
 const ReduxActions = require('./components/redux-actions.js')
-// const ReduxStore = require('./redux/ReduxStore')
 const ReduxActionTypes = require('./components/redux-actionTypes.js')
 const ReduxReducer = require('./components/redux-reducer.js')
 
@@ -65,7 +64,6 @@ function ComponentGen (name, rootDirectory, hasCSS, makeFn) {
 
 function StoreGen (name, rootDirectory) {
   ReduxActions(rootDirectory, name)
-  // ReduxStore(rootDirectory, name)
   ReduxActionTypes(rootDirectory, name)
   ReduxReducer(rootDirectory, name)
 }
