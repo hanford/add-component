@@ -11,6 +11,11 @@ const StyleSheet = require('./components/stylesheet')
 const ShallowRender = require('./components/shallow-render')
 const FunctionComponent = require('./components/function-component')
 
+const ReduxActions = require('./components/redux-actions.js')
+// const ReduxStore = require('./redux/ReduxStore')
+const ReduxActionTypes = require('./components/redux-actionTypes.js')
+const ReduxReducer = require('./components/redux-reducer.js')
+
 let componentName
 
 const program = require('commander')
@@ -18,6 +23,7 @@ const program = require('commander')
   .arguments('<component-directory>')
   .action(name => componentName = name)
   .option('-f, --fn', 'Create Function Component')
+  .option('-s, --store', 'Create Redux Store')
   .option('-c, --css', `Add ${componentName}.css`)
   .parse(process.argv)
 
@@ -27,11 +33,19 @@ function createComponent (name) {
   const rootDirectory = path.resolve(name)
   const hasCSS = program.css
   const makeFn = program.fn
+  const createStore = program.store
 
   if (!fs.existsSync(rootDirectory)) {
     mkdirp.sync(rootDirectory)
   }
 
+  if (createStore) {
+    return StoreGen(name, rootDirectory)
+  }
+  ComponentGen(name, rootDirectory, hasCSS, makeFn)
+}
+
+function ComponentGen (name, rootDirectory, hasCSS, makeFn) {
   if (hasCSS) {
     StyleSheet(rootDirectory)
   }
@@ -46,4 +60,12 @@ function createComponent (name) {
   ShallowRender(rootDirectory, name)
 
   console.log(chalk.green(`Component ${chalk.blue.underline.bold(name)} created`))
+}
+
+
+function StoreGen (name, rootDirectory) {
+  ReduxActions(rootDirectory, name)
+  // ReduxStore(rootDirectory, name)
+  ReduxActionTypes(rootDirectory, name)
+  ReduxReducer(rootDirectory, name)
 }
