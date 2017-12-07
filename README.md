@@ -133,6 +133,9 @@ export default users
 # Define directory with components
 $ add-react-component -d src Example
 
+# Creates component with styled-components as styling solution
+$ add-react-component -c styled-components Example
+
 # Does not use summary index.js but puts component into it
 $ add-component --no-index Example
 ```
