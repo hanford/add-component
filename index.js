@@ -24,12 +24,13 @@ const program = require('commander')
   .option('-f, --fn', 'Create Function Component')
   .option('-r, --redux', 'Create Redux Store')
   .option('-c, --css', `Add ${componentName}.css`)
+  .option('-d, --directory <directory>', 'Use directory')
   .parse(process.argv)
 
 createComponent(componentName)
 
 function createComponent (name) {
-  const rootDirectory = path.resolve(name)
+  const rootDirectory = program.directory ? path.join(path.resolve(program.directory), name) : path.resolve(name)
   const hasCSS = program.css
   const makeFn = program.fn
   const createStore = program.store

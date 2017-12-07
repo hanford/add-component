@@ -127,6 +127,13 @@ export default users
 
 ```
 
+## Additional options
+
+```
+# Define directory with components
+$ add-react-component -d src Example
+```
+
 
 ## License
 
