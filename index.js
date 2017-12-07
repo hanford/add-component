@@ -23,7 +23,7 @@ const program = require('commander')
   .action(name => componentName = name)
   .option('-f, --fn', 'Create Function Component')
   .option('-r, --redux', 'Create Redux Store')
-  .option('-s, --style', `Add ${componentName}.css`)
+  .option('-c, --css', `Add ${componentName}.css`)
   .parse(process.argv)
 
 createComponent(componentName)
