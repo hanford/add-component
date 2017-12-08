@@ -25,6 +25,7 @@ const program = require('commander')
   .option('-r, --redux', 'Create Redux Store')
   .option('-c, --css', `Add ${componentName}.css`)
   .option('-d, --directory <directory>', 'Use directory')
+  .option('--no-index', 'Without index file')
   .parse(process.argv)
 
 createComponent(componentName)
@@ -50,13 +51,20 @@ function ComponentGen (name, rootDirectory, hasCSS, makeFn) {
     StyleSheet(rootDirectory)
   }
 
-  if (makeFn) {
-    FunctionComponent(rootDirectory, name, hasCSS)
+  let componentFilePath
+  if (program.index) {
+    componentFilePath = path.join(rootDirectory, name + '.js')
+    ComponentIndex(rootDirectory, name)
   } else {
-    PureComponent(rootDirectory, name, hasCSS)
+    componentFilePath = path.join(rootDirectory, 'index.js')
   }
 
-  ComponentIndex(rootDirectory, name)
+  if (makeFn) {
+    FunctionComponent(rootDirectory, name, hasCSS, componentFilePath)
+  } else {
+    PureComponent(rootDirectory, name, hasCSS, componentFilePath)
+  }
+
   ShallowRender(rootDirectory, name)
 
   console.log(chalk.green(`Component ${chalk.blue.underline.bold(name)} created`))

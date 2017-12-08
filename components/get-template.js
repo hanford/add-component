@@ -4,8 +4,7 @@ const toTitleCase = require('titlecase')
 
 module.exports = getTemplate
 
-function getTemplate (dir, name, css, templateName) {
-  const file = path.join(dir, `${name}.js`)
+function getTemplate (dir, name, css, templateName, file) {
 
   const templateLocation = css
     ? `../templates/${templateName}-css.js`

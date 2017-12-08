@@ -132,8 +132,10 @@ export default users
 ```
 # Define directory with components
 $ add-react-component -d src Example
-```
 
+# Does not use summary index.js but puts component into it
+$ add-component --no-index Example
+```
 
 ## License
 
