@@ -97,6 +97,16 @@ function createComponent (name) {
 
 function ComponentGen (name, rootDirectory, makeFn, config) {
 
+  function TechGen (techConfig) {
+    if (techConfig.generator) {
+      const generator = require(techConfig.generator)
+      const generated = generator(rootDirectory, name, techConfig)
+      if (generated && generated.toImport) {
+        toImport = toImport.concat(generated.toImport)
+      }
+    }
+  }
+
   let toImport = [],
       lastToGenerate
 
@@ -106,13 +116,8 @@ function ComponentGen (name, rootDirectory, makeFn, config) {
       // generate it later TODO
       lastToGenerate = tech
       return
-    }
-    if (tech.generator) {
-      const generator = require(tech.generator)
-      const generated = generator(rootDirectory, name, config.techs[techName])
-      if (generated && generated.toImport) {
-        toImport = toImport.concat(generated.toImport)
-      }
+    } else {
+      TechGen(tech)
     }
   });
 
