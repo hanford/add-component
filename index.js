@@ -27,13 +27,56 @@ const program = require('commander')
   .option('-d, --directory <directory>', 'Use directory')
   .option('--no-index', 'Without index file')
   .option('-c, --css [css]', 'Add styling')
+  .option('--config [config]', 'Custom configuration')
   .parse(process.argv)
+
+const config = getConfig(program.config);
+
+function getConfig (customConfigPath) {
+  // get default config
+  const defaultConfig = require('./config.js')
+
+  let customConfig = {}
+  if (customConfigPath) {
+    customConfig = require(path.resolve(customConfigPath))
+  }
+
+  let commonConfig =  Object.assign(defaultConfig, customConfig)
+
+  // adjust config according to given options
+  // remove CSS technologies if they are not needed
+
+  if (!program.css) {
+    Object.keys(commonConfig.techs).forEach(function(techName) {
+      if (techName === 'css' || commonConfig.techs[techName].cliOption === 'css') {
+        delete commonConfig.techs[techName]
+      }
+    })
+  } else if (program.css === true) {
+    // leave only original CSS technology
+    Object.keys(commonConfig.techs).forEach(function(techName) {
+      if (commonConfig.techs[techName].cliOption === 'css') {
+        delete commonConfig.techs[techName]
+      }
+    })
+  } else {
+    // leave only specific CSS technology
+    Object.keys(commonConfig.techs).forEach(function(techName) {
+      if (techName === 'css') {
+        delete commonConfig.techs[techName]
+      } else if (techName !== program.css && commonConfig.techs[techName].cliOption === 'css') {
+        delete commonConfig.techs[techName]
+      }
+    })
+  }
+
+  return commonConfig
+}
 
 createComponent(componentName)
 
 function createComponent (name) {
   const rootDirectory = program.directory ? path.join(path.resolve(program.directory), name) : path.resolve(name)
-  const hasCSS = program.css
   const makeFn = program.fn
   const createStore = program.store
 
@@ -44,21 +87,20 @@ function createComponent (name) {
   if (createStore) {
     return StoreGen(name, rootDirectory)
   }
-  ComponentGen(name, rootDirectory, hasCSS, makeFn)
+  ComponentGen(name, rootDirectory, makeFn, config)
 }
 
-function ComponentGen (name, rootDirectory, hasCSS, makeFn) {
+function ComponentGen (name, rootDirectory, makeFn, config) {
 
-  let toImport = [];
+  let toImport = []
 
-  switch (hasCSS) {
-    case 'styled-components':
-      toImport = toImport.concat(StyledComponents(rootDirectory, name).toImport)
-      break
-    case true:
-      toImport = toImport.concat(StyleSheet(rootDirectory).toImport)
-      break
-  }
+  Object.keys(config.techs).forEach(function(techName) {
+    const tech = config.techs[techName]
+    if (tech.generator) {
+      const generator = require(tech.generator)
+      toImport = toImport.concat(generator(rootDirectory, name).toImport)
+    }
+  });
 
   let componentFilePath
   if (program.index) {
