@@ -44,8 +44,8 @@ function getConfig (customConfigPath) {
   let commonConfig =  Object.assign(defaultConfig, customConfig)
 
   // adjust config according to given options
-  // remove CSS technologies if they are not needed
 
+  // remove CSS technologies if they are not needed
   if (!program.css) {
     Object.keys(commonConfig.techs).forEach(function(techName) {
       if (techName === 'css' || commonConfig.techs[techName].cliOption === 'css') {
@@ -70,13 +70,18 @@ function getConfig (customConfigPath) {
     })
   }
 
+  // rewrite directory
+  if (program.directory) {
+    commonConfig.directory = program.directory
+  }
+
   return commonConfig
 }
 
 createComponent(componentName)
 
 function createComponent (name) {
-  const rootDirectory = program.directory ? path.join(path.resolve(program.directory), name) : path.resolve(name)
+  const rootDirectory = path.join(path.resolve(config.directory), name)
   const makeFn = program.fn
   const createStore = program.store
 

@@ -12,4 +12,5 @@ module.exports = {
       template: './templates/stylesheet.css'
     }
   },
+  directory: './'
 }
