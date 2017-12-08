@@ -5,12 +5,7 @@ const fs = require('fs')
 const mkdirp = require('mkdirp')
 const chalk = require('chalk')
 
-const ComponentIndex = require('./components/component-index')
-const PureComponent = require('./components/pure-component')
-const StyleSheet = require('./components/stylesheet')
-const StyledComponents = require('./components/styled-components')
 const ShallowRender = require('./components/shallow-render')
-const FunctionComponent = require('./components/function-component')
 
 const ReduxActions = require('./components/redux-actions.js')
 const ReduxActionTypes = require('./components/redux-actionTypes.js')
@@ -75,6 +70,13 @@ function getConfig (customConfigPath) {
     commonConfig.directory = program.directory
   }
 
+  if (program.fn) {
+   // make functional component
+   if (commonConfig.techs['react']) {
+     commonConfig.techs['react'].template = commonConfig.techs['react'].functionalTemplate
+   }
+  }
+
   return commonConfig
 }
 
@@ -100,7 +102,7 @@ function ComponentGen (name, rootDirectory, makeFn, config) {
   function TechGen (techConfig) {
     if (techConfig.generator) {
       const generator = require(techConfig.generator)
-      const generated = generator(rootDirectory, name, techConfig)
+      const generated = generator(rootDirectory, name, techConfig, toImport)
       if (generated && generated.toImport) {
         toImport = toImport.concat(generated.toImport)
       }
@@ -129,10 +131,8 @@ function ComponentGen (name, rootDirectory, makeFn, config) {
     componentFilePath = path.join(rootDirectory, 'index.js')
   }
 
-  if (makeFn) {
-    FunctionComponent(rootDirectory, name, componentFilePath, toImport)
-  } else {
-    PureComponent(rootDirectory, name, componentFilePath, toImport)
+  if (lastToGenerate) {
+    TechGen(lastToGenerate)
   }
 
   ShallowRender(rootDirectory, name)

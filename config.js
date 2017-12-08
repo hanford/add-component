@@ -20,9 +20,9 @@ module.exports = {
     },
     'react': {
       generator: './components/react',
-      pureTemplate: path.resolve(__dirname, './templates/pure-component.js'),
+      template: path.resolve(__dirname, './templates/pure-component.js'),
       functionalTemplate: path.resolve(__dirname, './templates/functional-component.js'),
-      fileName: '${componentName}.js',
+      fileName: '`${name}.js`',
       last: true
     }
   },
