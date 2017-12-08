@@ -12,6 +12,18 @@ module.exports = {
       generator: './components/stylesheet',
       template: path.resolve(__dirname, './templates/style.css'),
       fileName: 'style.css'
+    },
+    'index': {
+      generator: './components/component-index',
+      template: path.resolve(__dirname, './templates/index.js'),
+      fileName: 'index.js'
+    },
+    'react': {
+      generator: './components/react',
+      pureTemplate: path.resolve(__dirname, './templates/pure-component.js'),
+      functionalTemplate: path.resolve(__dirname, './templates/functional-component.js'),
+      fileName: '${componentName}.js',
+      last: true
     }
   },
   directory: './'

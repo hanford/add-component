@@ -97,13 +97,22 @@ function createComponent (name) {
 
 function ComponentGen (name, rootDirectory, makeFn, config) {
 
-  let toImport = []
+  let toImport = [],
+      lastToGenerate
 
   Object.keys(config.techs).forEach(function(techName) {
     const tech = config.techs[techName]
+    if (tech.last) {
+      // generate it later TODO
+      lastToGenerate = tech
+      return
+    }
     if (tech.generator) {
       const generator = require(tech.generator)
-      toImport = toImport.concat(generator(rootDirectory, name, config.techs[techName]).toImport)
+      const generated = generator(rootDirectory, name, config.techs[techName])
+      if (generated && generated.toImport) {
+        toImport = toImport.concat(generated.toImport)
+      }
     }
   });
 
