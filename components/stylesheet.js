@@ -3,12 +3,13 @@ const fs = require('fs')
 
 module.exports = StyleSheet
 
-function StyleSheet (rootDirectory) {
+function StyleSheet (dir, name, techConfig) {
   const filePath = 'style.css'
-  const templateLocation = '../templates/style.css'
-  const body = fs.readFileSync(path.join(__dirname, templateLocation), 'utf-8')
+  const file = path.join(dir, filePath)
 
-  fs.writeFileSync(path.join(rootDirectory, filePath), body)
+  const body = fs.readFileSync(techConfig.template, 'utf-8')
+
+  fs.writeFileSync(file, body)
 
   return {
     toImport: [ `import style from './${filePath}'` ]

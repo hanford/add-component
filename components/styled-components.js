@@ -4,13 +4,12 @@ const toTitleCase = require('titlecase')
 
 module.exports = StyledComponents
 
-function StyledComponents (dir, name) {
+function StyledComponents (dir, name, techConfig) {
   const filePath = 'styles.js'
   const file = path.join(dir, filePath)
 
-  const templateLocation = '../templates/styled-components.js'
   const body = fs
-    .readFileSync(path.join(__dirname, templateLocation), 'utf-8')
+    .readFileSync(techConfig.template, 'utf-8')
     .split('Template')
     .join(toTitleCase(name))
 

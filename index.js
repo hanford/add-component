@@ -103,7 +103,7 @@ function ComponentGen (name, rootDirectory, makeFn, config) {
     const tech = config.techs[techName]
     if (tech.generator) {
       const generator = require(tech.generator)
-      toImport = toImport.concat(generator(rootDirectory, name).toImport)
+      toImport = toImport.concat(generator(rootDirectory, name, config.techs[techName]).toImport)
     }
   });
 

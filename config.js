@@ -4,12 +4,12 @@ module.exports = {
   techs: {
     'styled-components': {
       generator: './components/styled-components',
-      template: './templates/styled-components',
+      template: path.resolve(__dirname, './templates/styled-components.js'),
       cliOption: 'css'
     },
     'css': {
       generator: './components/stylesheet',
-      template: './templates/stylesheet.css'
+      template: path.resolve(__dirname, './templates/style.css')
     }
   },
   directory: './'
