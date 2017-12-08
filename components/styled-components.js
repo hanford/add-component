@@ -5,8 +5,7 @@ const toTitleCase = require('titlecase')
 module.exports = StyledComponents
 
 function StyledComponents (dir, name, techConfig) {
-  const filePath = 'styles.js'
-  const file = path.join(dir, filePath)
+  const file = path.join(dir, techConfig.fileName)
 
   const body = fs
     .readFileSync(techConfig.template, 'utf-8')
@@ -16,6 +15,6 @@ function StyledComponents (dir, name, techConfig) {
   fs.writeFileSync(file, body)
 
   return {
-    toImport: [ `import * as s from './${filePath}'` ]
+    toImport: [ `import * as s from './${techConfig.fileName}'` ]
   }
 }

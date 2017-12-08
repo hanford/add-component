@@ -5,11 +5,13 @@ module.exports = {
     'styled-components': {
       generator: './components/styled-components',
       template: path.resolve(__dirname, './templates/styled-components.js'),
+      fileName: 'styles.js',
       cliOption: 'css'
     },
     'css': {
       generator: './components/stylesheet',
-      template: path.resolve(__dirname, './templates/style.css')
+      template: path.resolve(__dirname, './templates/style.css'),
+      fileName: 'style.css'
     }
   },
   directory: './'
