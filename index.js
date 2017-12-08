@@ -4,6 +4,7 @@ const path = require('path')
 const fs = require('fs')
 const mkdirp = require('mkdirp')
 const chalk = require('chalk')
+const deepmerge = require('deepmerge')
 
 const ShallowRender = require('./components/shallow-render')
 
@@ -36,7 +37,7 @@ function getConfig (customConfigPath) {
     customConfig = require(path.resolve(customConfigPath))
   }
 
-  let commonConfig =  Object.assign(defaultConfig, customConfig)
+  let commonConfig =  deepmerge(defaultConfig, customConfig)
 
   // adjust config according to given options
 

@@ -23,6 +23,7 @@
   "dependencies": {
     "chalk": "~2.1.0",
     "commander": "~2.9.0",
+    "deepmerge": "^2.0.1",
     "mkdirp": "~0.5.1",
     "titlecase": "~1.1.2"
   },
