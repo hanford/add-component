@@ -4,9 +4,12 @@ const toTitleCase = require('titlecase')
 
 module.exports = ComponentIndex
 
-function ComponentIndex (rootDirectory, name, techConfig) {
-  const file = path.join(rootDirectory, techConfig.fileName)
-
+function ComponentIndex (dir, name, techConfig) {
+  let fileName = techConfig.fileName
+  try {
+    fileName = eval(fileName)
+  } catch (e) {}
+  const file = path.join(dir, fileName)
 
   const body = fs
     .readFileSync(techConfig.template, 'utf-8')

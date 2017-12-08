@@ -5,7 +5,11 @@ const toTitleCase = require('titlecase')
 module.exports = getTemplate
 
 function getTemplate (dir, name, techConfig, toImport) {
-  const file = path.join(dir, eval(techConfig.fileName))
+  let fileName = techConfig.fileName
+  try {
+    fileName = eval(fileName)
+  } catch (e) {}
+  const file = path.join(dir, fileName)
 
   const importCode = toImport.join('\n')
 
