@@ -6,10 +6,6 @@ const mkdirp = require('mkdirp')
 const chalk = require('chalk')
 const deepmerge = require('deepmerge')
 
-const ShallowRender = require('./components/shallow-render')
-
-//const ReduxReducer = require('./components/redux-reducer.js')
-
 let componentName
 
 const program = require('commander')

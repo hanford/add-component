@@ -39,6 +39,11 @@ module.exports = {
       generator: './components/redux-actionTypes',
       template: path.resolve(__dirname, './templates/actionTypes.js'),
       fileName: 'actionTypes.js',
+    },
+    'redux-reducer': {
+      generator: './components/redux-reducer',
+      template: path.resolve(__dirname, './templates/reducer.js'),
+      fileName: 'reducer.js',
     }
   },
   directory: './'
