@@ -91,7 +91,6 @@ createComponent(componentName)
 
 function createComponent (name) {
   const rootDirectory = path.join(path.resolve(config.directory), name)
-  const makeFn = program.fn
   const createStore = program.store
 
   if (!fs.existsSync(rootDirectory)) {
@@ -101,10 +100,10 @@ function createComponent (name) {
   if (createStore) {
     return StoreGen(name, rootDirectory)
   }
-  ComponentGen(name, rootDirectory, makeFn, config)
+  ComponentGen(name, rootDirectory, config)
 }
 
-function ComponentGen (name, rootDirectory, makeFn, config) {
+function ComponentGen (name, rootDirectory, config) {
 
   function TechGen (techConfig) {
     if (techConfig.generator) {
