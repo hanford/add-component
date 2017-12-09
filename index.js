@@ -8,9 +8,9 @@ const deepmerge = require('deepmerge')
 
 const ShallowRender = require('./components/shallow-render')
 
-const ReduxActions = require('./components/redux-actions.js')
-const ReduxActionTypes = require('./components/redux-actionTypes.js')
-const ReduxReducer = require('./components/redux-reducer.js')
+//const ReduxActions = require('./components/redux-actions.js')
+//const ReduxActionTypes = require('./components/redux-actionTypes.js')
+//const ReduxReducer = require('./components/redux-reducer.js')
 
 let componentName
 
@@ -133,8 +133,6 @@ function ComponentGen (name, rootDirectory, makeFn, config) {
   if (lastToGenerate) {
     TechGen(lastToGenerate)
   }
-
-  ShallowRender(rootDirectory, name)
 
   console.log(chalk.green(`Component ${chalk.blue.underline.bold(name)} created`))
 }

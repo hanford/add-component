@@ -24,6 +24,11 @@ module.exports = {
       functionalTemplate: path.resolve(__dirname, './templates/functional-component.js'),
       fileName: '`${name}.js`',
       last: true
+    },
+    'shallow': {
+      generator: './components/shallow-render',
+      template: path.resolve(__dirname, './templates/test.js'),
+      fileName: '`${name}.test.js`',
     }
   },
   directory: './'
