@@ -1,6 +1,11 @@
 const path = require('path')
 
 module.exports = {
+/*  techsToGen: [
+    'styled-components',
+    'react',
+    'redux-reducer',
+  ],*/
   techs: {
     'styled-components': {
       generator: './components/styled-components',

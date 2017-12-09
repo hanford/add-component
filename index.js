@@ -35,6 +35,17 @@ function getConfig (customConfigPath) {
 
   // adjust config according to given options
 
+  // define techs to generate by default
+  if (!commonConfig.techsToGen) {
+    commonConfig.techsToGen = Object.keys(commonConfig.techs)
+
+    // exclude redux technologies if there was no option
+    if (!program.redux) {
+      commonConfig.techsToGen = commonConfig.techsToGen.filter(item => {
+        return item !== 'redux-actions' && item !== 'redux-actiontypes' && item !== 'redux-reducer'
+      })
+    }
+  }
   // remove CSS technologies if they are not needed
   if (!program.css) {
     Object.keys(commonConfig.techs).forEach(function(techName) {
@@ -60,6 +71,15 @@ function getConfig (customConfigPath) {
     })
   }
 
+  // filter out technologies
+  if (commonConfig.techsToGen) {
+    Object.keys(commonConfig.techs).forEach(function(techName) {
+      if (commonConfig.techsToGen.indexOf(techName) === -1) {
+        delete commonConfig.techs[techName]
+      }
+    })
+  }
+
   // rewrite directory
   if (program.directory) {
     commonConfig.directory = program.directory
@@ -76,13 +96,6 @@ function getConfig (customConfigPath) {
   if (!program.index) {
     commonConfig.techs['react'].fileName = 'index.js'
     delete commonConfig.techs['index']
-  }
-
-  // remove unused technologies
-  if (!program.redux) {
-   delete commonConfig.techs['redux-actions']
-   delete commonConfig.techs['redux-actiontypes']
-   delete commonConfig.techs['redux-reducer']
   }
 
   return commonConfig
