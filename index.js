@@ -8,7 +8,6 @@ const deepmerge = require('deepmerge')
 
 const ShallowRender = require('./components/shallow-render')
 
-//const ReduxActionTypes = require('./components/redux-actionTypes.js')
 //const ReduxReducer = require('./components/redux-reducer.js')
 
 let componentName
