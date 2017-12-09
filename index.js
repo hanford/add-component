@@ -78,6 +78,13 @@ function getConfig (customConfigPath) {
     delete commonConfig.techs['index']
   }
 
+  // remove unused technologies
+  if (!program.redux) {
+   delete commonConfig.techs['redux-actions']
+   delete commonConfig.techs['redux-actiontypes']
+   delete commonConfig.techs['redux-reducer']
+  }
+
   return commonConfig
 }
 

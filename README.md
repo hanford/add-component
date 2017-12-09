@@ -21,7 +21,7 @@ $ add-component ${name} -c
 $ add-component ${name} -c -f
 
 # Generate a full redux store
-$ add-component ${name} --store
+$ add-component ${name} --redux
 ```
 
 ## Example
@@ -78,7 +78,7 @@ it('renders without props', () => {
 #### Redux Store
 
 ```sh
-add-component count --store
+add-component count --redux
 ```
 Generates `count` folder with the following:
 
