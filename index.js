@@ -78,6 +78,12 @@ function getConfig (customConfigPath) {
    }
   }
 
+  // change main file to index or not
+  if (!program.index) {
+    commonConfig.techs['react'].fileName = 'index.js'
+    delete commonConfig.techs['index']
+  }
+
   return commonConfig
 }
 
@@ -116,21 +122,13 @@ function ComponentGen (name, rootDirectory, makeFn, config) {
   Object.keys(config.techs).forEach(function(techName) {
     const tech = config.techs[techName]
     if (tech.last) {
-      // generate it later TODO
+      // generate it later
       lastToGenerate = tech
       return
     } else {
       TechGen(tech)
     }
   });
-
-  let componentFilePath
-  if (program.index) {
-    componentFilePath = path.join(rootDirectory, name + '.js')
-    ComponentIndex(rootDirectory, name)
-  } else {
-    componentFilePath = path.join(rootDirectory, 'index.js')
-  }
 
   if (lastToGenerate) {
     TechGen(lastToGenerate)
