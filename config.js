@@ -29,6 +29,11 @@ module.exports = {
       generator: './components/shallow-render',
       template: path.resolve(__dirname, './templates/test.js'),
       fileName: '`${name}.test.js`',
+    },
+    'redux-actions': {
+      generator: './components/redux-actions',
+      template: path.resolve(__dirname, './templates/action.js'),
+      fileName: 'action.js',
     }
   },
   directory: './'
