@@ -35,6 +35,11 @@ module.exports = {
       template: path.resolve(__dirname, './templates/test.js'),
       fileName: '`${name}.test.js`',
     },
+    'storybook': {
+      generator: './components/storybook',
+      template: path.resolve(__dirname, './templates/storybook.js'),
+      fileName: '`${name}.stories.js`',
+    },
     'redux-actions': {
       generator: './components/redux-actions',
       template: path.resolve(__dirname, './templates/action.js'),
