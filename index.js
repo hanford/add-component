@@ -23,6 +23,7 @@ const program = require('commander')
 const config = getConfig(program.config);
 
 function getConfig (customConfigPath) {
+
   // get default config
   const defaultConfig = require('./config.js')
 
@@ -46,27 +47,28 @@ function getConfig (customConfigPath) {
       })
     }
   }
+
   // remove CSS technologies if they are not needed
+  // do not remove if they are specified in config
+  console.log(0, commonConfig.techsToGen)
   if (!program.css) {
-    Object.keys(commonConfig.techs).forEach(function(techName) {
-      if (techName === 'css' || commonConfig.techs[techName].cliOption === 'css') {
-        delete commonConfig.techs[techName]
-      }
-    })
-  } else if (program.css === true) {
+    // do nothing
+  }
+  else if (program.css === true) {
     // leave only original CSS technology
+    commonConfig.techsToGen.push('css')
     Object.keys(commonConfig.techs).forEach(function(techName) {
       if (commonConfig.techs[techName].cliOption === 'css') {
-        delete commonConfig.techs[techName]
+        commonConfig.techsToGen.splice(commonConfig.techsToGen.indexOf(techName), 1)
       }
     })
   } else {
     // leave only specific CSS technology
     Object.keys(commonConfig.techs).forEach(function(techName) {
-      if (techName === 'css') {
-        delete commonConfig.techs[techName]
-      } else if (techName !== program.css && commonConfig.techs[techName].cliOption === 'css') {
-        delete commonConfig.techs[techName]
+      if (techName === 'css' && commonConfig.techsToGen.indexOf('css') !== -1) {
+        commonConfig.techsToGen.splice(commonConfig.techsToGen.indexOf('css'), 1)
+      } else if (techName !== program.css && commonConfig.techs[techName].cliOption === 'css' && commonConfig.techsToGen.indexOf(techName) !== -1) {
+        commonConfig.techsToGen.splice(commonConfig.techsToGen.indexOf(techName), 1)
       }
     })
   }
