@@ -137,7 +137,39 @@ $ add-react-component -d src Example
 $ add-react-component -c styled-components Example
 
 # Does not use summary index.js but puts component into it
-$ add-component --no-index Example
+$ add-react-component --no-index Example
+```
+
+## Configuration
+
+You can define all the options in configuration file. Also, with configuration, you can redefine technology
+generators, technology templates and filenames. Look into `config.js` to find out what cat be setted.
+
+```
+# Run with configuration
+$ add-react-component --config .add-component/config.js Example
+
+# Example of configuration
+$ cat .add-component/config.js
+
+const path = require('path')
+
+module.exports = {
+  techsToGen: [
+    'styled-components',
+    'react',
+    'storybook',
+  ],
+  techs: {
+    'react': {
+      fileName: 'index.js'
+    },
+   'storybook': {
+      template: path.resolve(__dirname, './storybook-template.js')
+    }
+  },
+  directory: './src',
+}
 ```
 
 ## License
