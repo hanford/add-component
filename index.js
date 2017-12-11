@@ -50,7 +50,6 @@ function getConfig (customConfigPath) {
 
   // remove CSS technologies if they are not needed
   // do not remove if they are specified in config
-  console.log(0, commonConfig.techsToGen)
   if (!program.css) {
     // do nothing
   }
