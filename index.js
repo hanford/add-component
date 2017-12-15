@@ -40,11 +40,18 @@ function getConfig (customConfigPath) {
   if (!commonConfig.techsToGen) {
     commonConfig.techsToGen = Object.keys(commonConfig.techs)
 
-    // exclude redux technologies if there was no option
-    if (!program.redux) {
-      commonConfig.techsToGen = commonConfig.techsToGen.filter(item => {
-        return item !== 'redux-actions' && item !== 'redux-actiontypes' && item !== 'redux-reducer'
-      })
+  }
+
+  // include redux technologies if there was no option
+  if (program.redux) {
+    if (commonConfig.techsToGen.indexOf('redux-actions') === -1) {
+      commonConfig.techsToGen.push('redux-actions')
+    }
+    if (commonConfig.techsToGen.indexOf('redux-actiontypes') === -1) {
+      commonConfig.techsToGen.push('redux-actiontypes')
+    }
+    if (commonConfig.techsToGen.indexOf('redux-reducer') === -1) {
+      commonConfig.techsToGen.push('redux-reducer')
     }
   }
 
@@ -53,16 +60,21 @@ function getConfig (customConfigPath) {
   if (!program.css) {
     // do nothing
   }
-  else if (program.css === true) {
+  else if (program.css === 'css' || program.css === true) {
     // leave only original CSS technology
-    commonConfig.techsToGen.push('css')
+    if (commonConfig.techsToGen.indexOf('css') === -1) {
+      commonConfig.techsToGen.push('css')
+    }
     Object.keys(commonConfig.techs).forEach(function(techName) {
-      if (commonConfig.techs[techName].cliOption === 'css') {
+      if (commonConfig.techs[techName].cliOption === 'css'  && commonConfig.techsToGen.indexOf(techName) !== -1) {
         commonConfig.techsToGen.splice(commonConfig.techsToGen.indexOf(techName), 1)
       }
     })
   } else {
     // leave only specific CSS technology
+    if (commonConfig.techsToGen.indexOf(program.css) === -1) {
+      commonConfig.techsToGen.push(program.css)
+    }
     Object.keys(commonConfig.techs).forEach(function(techName) {
       if (techName === 'css' && commonConfig.techsToGen.indexOf('css') !== -1) {
         commonConfig.techsToGen.splice(commonConfig.techsToGen.indexOf('css'), 1)
