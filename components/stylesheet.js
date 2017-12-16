@@ -3,9 +3,18 @@ const fs = require('fs')
 
 module.exports = StyleSheet
 
-function StyleSheet (rootDirectory) {
-  const templateLocation = '../templates/style.css'
-  const body = fs.readFileSync(path.join(__dirname, templateLocation), 'utf-8')
+function StyleSheet (dir, name, techConfig) {
+  let fileName = techConfig.fileName
+  try {
+    fileName = eval(fileName)
+  } catch (e) {}
+  const file = path.join(dir, fileName)
 
-  fs.writeFileSync(path.join(rootDirectory, 'style.css'), body)
+  const body = fs.readFileSync(techConfig.template, 'utf-8')
+
+  fs.writeFileSync(file, body)
+
+  return {
+    toImport: [ `import style from './${techConfig.fileName}'` ]
+  }
 }

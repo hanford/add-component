@@ -1,9 +1,10 @@
 const path = require('path')
 const fs = require('fs')
+const toTitleCase = require('titlecase')
 
-module.exports = ReduxReducer
+module.exports = StyledComponents
 
-function ReduxReducer (dir, name, techConfig) {
+function StyledComponents (dir, name, techConfig) {
   let fileName = techConfig.fileName
   try {
     fileName = eval(fileName)
@@ -12,6 +13,9 @@ function ReduxReducer (dir, name, techConfig) {
 
   const body = fs
     .readFileSync(techConfig.template, 'utf-8')
+    .split('Template')
+    .join(toTitleCase(name))
 
-  return fs.writeFileSync(file, body)
+  fs.writeFileSync(file, body)
+
 }

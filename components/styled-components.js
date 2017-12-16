@@ -2,9 +2,9 @@ const path = require('path')
 const fs = require('fs')
 const toTitleCase = require('titlecase')
 
-module.exports = ComponentIndex
+module.exports = StyledComponents
 
-function ComponentIndex (dir, name, techConfig) {
+function StyledComponents (dir, name, techConfig) {
   let fileName = techConfig.fileName
   try {
     fileName = eval(fileName)
@@ -15,8 +15,10 @@ function ComponentIndex (dir, name, techConfig) {
     .readFileSync(techConfig.template, 'utf-8')
     .split('Template')
     .join(toTitleCase(name))
-    .split('template')
-    .join(name)
 
-  return fs.writeFileSync(file, body)
+  fs.writeFileSync(file, body)
+
+  return {
+    toImport: [ `import * as s from './${techConfig.fileName}'` ]
+  }
 }

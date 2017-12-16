@@ -1,7 +1,17 @@
-const getTemplate = require('./get-template')
+const path = require('path')
+const fs = require('fs')
 
 module.exports = ReduxActionTypes
 
-function ReduxActionTypes (rootDirectory, name, hasCSS) {
-  return getTemplate(rootDirectory, 'actionTypes', hasCSS, 'actionTypes')
+function ReduxActionTypes (dir, name, techConfig) {
+  let fileName = techConfig.fileName
+  try {
+    fileName = eval(fileName)
+  } catch (e) {}
+  const file = path.join(dir, fileName)
+
+  const body = fs
+    .readFileSync(techConfig.template, 'utf-8')
+
+  return fs.writeFileSync(file, body)
 }
