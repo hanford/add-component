@@ -20,7 +20,7 @@ const program = require('commander')
   .option('--config [config]', 'Custom configuration')
   .parse(process.argv)
 
-const config = getConfig(program.config);
+const config = getConfig(program.config)
 
 function getConfig (customConfigPath) {
 
@@ -65,7 +65,7 @@ function getConfig (customConfigPath) {
     if (commonConfig.techsToGen.indexOf('css') === -1) {
       commonConfig.techsToGen.push('css')
     }
-    Object.keys(commonConfig.techs).forEach(function(techName) {
+    Object.keys(commonConfig.techs).forEach(function (techName) {
       if (commonConfig.techs[techName].cliOption === 'css'  && commonConfig.techsToGen.indexOf(techName) !== -1) {
         commonConfig.techsToGen.splice(commonConfig.techsToGen.indexOf(techName), 1)
       }
@@ -75,7 +75,7 @@ function getConfig (customConfigPath) {
     if (commonConfig.techsToGen.indexOf(program.css) === -1) {
       commonConfig.techsToGen.push(program.css)
     }
-    Object.keys(commonConfig.techs).forEach(function(techName) {
+    Object.keys(commonConfig.techs).forEach(function (techName) {
       if (techName === 'css' && commonConfig.techsToGen.indexOf('css') !== -1) {
         commonConfig.techsToGen.splice(commonConfig.techsToGen.indexOf('css'), 1)
       } else if (techName !== program.css && commonConfig.techs[techName].cliOption === 'css' && commonConfig.techsToGen.indexOf(techName) !== -1) {
@@ -86,7 +86,7 @@ function getConfig (customConfigPath) {
 
   // filter out technologies
   if (commonConfig.techsToGen) {
-    Object.keys(commonConfig.techs).forEach(function(techName) {
+    Object.keys(commonConfig.techs).forEach(function (techName) {
       if (commonConfig.techsToGen.indexOf(techName) === -1) {
         delete commonConfig.techs[techName]
       }
@@ -131,7 +131,6 @@ function createComponent (name) {
 }
 
 function ComponentGen (name, rootDirectory, config) {
-
   function TechGen (techConfig) {
     if (techConfig.generator) {
       const generator = require(techConfig.generator)
@@ -154,7 +153,7 @@ function ComponentGen (name, rootDirectory, config) {
     } else {
       TechGen(tech)
     }
-  });
+  })
 
   if (lastToGenerate) {
     TechGen(lastToGenerate)

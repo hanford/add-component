@@ -4,7 +4,7 @@ module.exports = {
   techsToGen: [
     'index',
     'react',
-    'shallow',
+    'shallow'
   ],
   techs: {
     'styled-components': {
@@ -33,27 +33,27 @@ module.exports = {
     'shallow': {
       generator: './components/shallow-render',
       template: path.resolve(__dirname, './templates/test.js'),
-      fileName: '`${name}.test.js`',
+      fileName: '`${name}.test.js`'
     },
     'storybook': {
       generator: './components/storybook',
       template: path.resolve(__dirname, './templates/storybook.js'),
-      fileName: '`${name}.stories.js`',
+      fileName: '`${name}.stories.js`'
     },
     'redux-actions': {
       generator: './components/redux-actions',
       template: path.resolve(__dirname, './templates/action.js'),
-      fileName: 'action.js',
+      fileName: 'action.js'
     },
     'redux-actiontypes': {
       generator: './components/redux-actionTypes',
       template: path.resolve(__dirname, './templates/actionTypes.js'),
-      fileName: 'actionTypes.js',
+      fileName: 'actionTypes.js'
     },
     'redux-reducer': {
       generator: './components/redux-reducer',
       template: path.resolve(__dirname, './templates/reducer.js'),
-      fileName: 'reducer.js',
+      fileName: 'reducer.js'
     }
   },
   directory: './'
