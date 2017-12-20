@@ -34,6 +34,11 @@ function getConfig (customConfigPath) {
 
   let commonConfig =  deepmerge(defaultConfig, customConfig)
 
+  // to not overwrite the list of technologies
+  if (customConfig.techsToGen && customConfig.techsToGen.indexOf('*') === -1) {
+   commonConfig.techsToGen = customConfig.techsToGen
+  }
+
   // adjust config according to given options
 
   // define techs to generate by default

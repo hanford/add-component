@@ -172,6 +172,34 @@ module.exports = {
 }
 ```
 
+### Configuration details
+
+#### Technologies to generate
+
+In `techsToGen`, you can define the list of technologies to generate. This list will overwrite the default list, but if
+you include `*`, the default technologies will preserve.<br/>
+Note, that for custom technologies you will also need its configuration in `techs` field.
+
+To re-define the list of technolofies:
+```
+module.exports = {
+  techsToGen: [
+    'styled-components',
+    'react'
+  ]
+}
+```
+
+To save default list of technologies and add more:
+```
+module.exports = {
+  techsToGen: [
+    '*',
+    'styled-components'
+  ]
+}
+```
+
 ## License
 
 MIT © [Jack Hanford](http://jackhanford.com)
