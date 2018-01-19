@@ -30,6 +30,8 @@ function getConfig (customConfigPath) {
   let customConfig = {}
   if (customConfigPath) {
     customConfig = require(path.resolve(customConfigPath))
+  } else if (fs.existsSync(path.resolve('./.add-component/config.js'))) {
+    customConfig = require(path.resolve('./.add-component/config.js'))
   }
 
   let commonConfig =  deepmerge(defaultConfig, customConfig)

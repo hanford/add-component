@@ -145,9 +145,13 @@ $ add-react-component --no-index Example
 You can define all the options in configuration file. Also, with configuration, you can redefine technology
 generators, technology templates and filenames. Look into `config.js` to find out what cat be setted.
 
+If you store your configuration file by `.add-component/config.js` path, you do not need any additional parameter. Just
+Run the command as usual.
+
+If you want your configuration file to have another name or be in another folder, tell the command where it is:
 ```
 # Run with configuration
-$ add-react-component --config .add-component/config.js Example
+$ add-react-component --config congifs/addcomponent-config.js Example
 
 # Example of configuration
 $ cat .add-component/config.js
