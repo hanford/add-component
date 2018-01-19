@@ -122,7 +122,7 @@ function getConfig (customConfigPath) {
 createComponent(componentName)
 
 function createComponent (name) {
-  const rootDirectory = path.join(path.resolve(config.directory), name)
+  const rootDirectory = config.componentDirectory ? path.join(path.resolve(config.directory), name) : path.resolve(config.directory)
   const createStore = program.store
 
   if (!fs.existsSync(rootDirectory)) {

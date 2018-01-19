@@ -56,5 +56,6 @@ module.exports = {
       fileName: 'reducer.js'
     }
   },
-  directory: './'
+  directory: './',
+  componentDirectory: true
 }
