@@ -151,7 +151,7 @@ Run the command as usual.
 If you want your configuration file to have another name or be in another folder, tell the command where it is:
 ```
 # Run with configuration
-$ add-react-component --config congifs/addcomponent-config.js Example
+$ add-react-component --config configs/addcomponent-config.js Example
 
 # Example of configuration
 $ cat .add-component/config.js
