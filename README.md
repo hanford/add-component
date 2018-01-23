@@ -200,6 +200,24 @@ module.exports = {
 }
 ```
 
+##### Path configuration
+
+You can define a directory for your components. By default it is the root of your project.
+```
+module.exports = {
+  directory: './src'
+}
+```
+
+You can choose not to have a directory for every component but put the files for all the components into the same source
+folder. In this case, also configure the naming schemas for all the technologies so that all the files for different
+components contain the component name and do not overwrite each other.
+```
+module.exports = {
+  componentDirectory: false
+}
+```
+
 ## License
 
 MIT © [Jack Hanford](http://jackhanford.com)
